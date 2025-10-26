@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ma princesse — Carta para ti</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap');
+
+  :root{
+    --bg-dark:#03020a;
+    --violet-1:#2b0038;
+    --violet-2:#411049;
+    --accent:#caa0f2;
+    --gold:#e6bf48;
+    --cream:#f6ede6;
+    --glass: rgba(255,255,255,0.03);
+    --card-radius:16px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Playfair Display", serif;
+    -webkit-font-smoothing:antialiased;
+    background: linear-gradient(180deg,#030010 0%, #080316 100%);
+    color:var(--cream);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+
+  /* Stars canvas */
+  #stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+  .wrap { width:100%; max-width:980px; position:relative; z-index:2; }
+
+  /* Intro overlay */
+  .intro {
+    position:fixed; inset:0; z-index:9;
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(180deg, rgba(6,2,20,0.88), rgba(0,0,0,0.92));
+    backdrop-filter: blur(4px);
+    flex-direction:column; gap:12px; text-align:center; padding:20px;
+  }
+  .intro h1{
+    font-family:'Great Vibes', cursive;
+    color:var(--gold); font-size:3rem; text-shadow:0 0 18px rgba(230,191,72,0.18);
+  }
+  .intro p{ max-width:760px; color:#eadfd6; font-size:1.02rem; line-height:1.45 }
+  .btn-enter{
+    margin-top:8px; padding:12px 28px; border-radius:999px;
+    background: linear-gradient(180deg, rgba(201,158,247,0.18), rgba(201,158,247,0.06));
+    border:1px solid rgba(201,158,247,0.26);
+    color:#fff; font-weight:700; cursor:pointer; box-shadow:0 10px 28px rgba(45,8,80,0.45);
+  }
+
+  /* Card */
+  .card{
+    border-radius:var(--card-radius);
+    overflow:hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(201,158,247,0.06);
+    box-shadow: 0 18px 60px rgba(0,0,0,0.7);
+  }
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 20px; gap:12px;
+  }
+  .title{
+    font-family:'Great Vibes', cursive; color:var(--gold); font-size:1.6rem;
+  }
+  .subtitle{ color:#dcd0c8; font-size:0.95rem; opacity:0.95 }
+
+  .main-area{ padding:28px; min-height:68vh; position:relative; z-index:3; }
+
+  .panel{
+    border-radius:12px; padding:26px;
+    background:var(--glass); border:1px solid rgba(255,255,255,0.02);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    overflow:auto;
+  }
+
+  .h-country { color:var(--gold); font-weight:700; font-size:1.05rem; margin-bottom:14px; text-align:center; }
+  .letter {
+    font-size:1.08rem; line-height:1.85; color:#f3eae5; text-align:justify;
+    max-width:900px; margin:0 auto 18px auto; white-space:pre-line;
+  }
+
+  .signature {
+    margin-top:22px; text-align:right; color:var(--gold); font-family:'Great Vibes', cursive; font-size:1.2rem;
+  }
+
+  footer.note { text-align:center; margin-top:14px; color:rgba(230,191,72,0.9); font-family:'Great Vibes'; padding:8px 0; }
+
+  /* responsive */
+  @media (max-width:720px){
+    .main-area{ padding:18px }
+    .panel{ padding:18px }
+    .intro h1{ font-size:2.4rem }
+  }
+</style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="wrap">
+    <!-- Intro -->
+    <section class="intro" id="intro">
+      <h1>Ma princesse</h1>
+      <p><strong>Te escribo desde este rincón del universo</strong><br>
+      Palabras que llevan mi latido: pulsa <em>Entrar</em> y encontrarás lo que guardo para vos.</p>
+      <button class="btn-enter" id="enterBtn">Entrar</button>
+    </section>
+
+    <!-- Card -->
+    <article class="card" id="cardRoot" aria-hidden="true">
+      <div class="topbar">
+        <div>
+          <div class="title">Ma princesse — Carta</div>
+          <div class="subtitle">Una carta para vos, con todo lo que soy</div>
+        </div>
+        <div style="text-align:right"><div style="font-size:0.85rem;color:#e9dbd0">❤ Texto en español</div></div>
+      </div>
+
+      <div class="main-area">
+        <section class="panel" id="panel">
+          <div class="h-country">Para vos, ahora</div>
+
+          <div class="letter" id="letterText">
+<!-- Aquí comienza la carta (texto apasionado y profundo en español) -->
+Querida,
+
+Hay noches en las que cierro los ojos y te veo con una claridad que duele: tu risa detenida en un instante, la forma en que mirás el mundo y la manera en que me hacés querer ser mejor. No me gustan las palabras vacías; por eso hoy prefiero poner todo lo que siento en líneas sinceras, sin rodeos.
+
+Te amo de una forma que atraviesa el impulso: es un amor que piensa, que cuida, que no se conforma con promesas pequeñas. Te amo con la certeza que viene de haber elegido una y otra vez. Cuando pienso en un futuro, aparecés vos en cada esquina, en cada proyecto, en los silencios compartidos y en las risas que se vuelven rituales.
+
+No quiero prometer cosas que no pueda cumplir; prefiero decirte lo que haré: estaré a tu lado cuando el día pese, cuando la duda asome, y cuando las ganas de seguir brillen. Voy a celebrar tus victorias con la misma intensidad con la que te abrazaré cuando el mundo parezca lento. Seré quien lleve tu mochila, quien sostenga tus esperas, quien te defienda en voz baja y en voz alta. Seré ese refugio sencillo que no necesita adornos.
+
+Mi deseo no es efímero: no busco un momento de gloria; quiero una vida hecha de pocas pero profundas certezas. Quiero construir un hogar que sea más que paredes: un lugar donde podamos equivocarnos sin miedo, donde las mañanas tengan el aroma de café compartido, donde las conversaciones se vuelvan largas y cómplices, y donde cada error sea una lección que nos acerque más.
+
+Sé que no todo será perfecto. Habrá mañanas opacas, días de cansancio y decisiones que duelan. Pero también habrá recetas nuevas, canciones que descubramos en la madrugada, viajes improvisados, y la tranquilidad de saber que estamos en el mismo equipo. Eso, para mí, es el sentido de amar: elegir juntos con paciencia, rebeldía y ternura.
+
+Te deseo con el calor de quien sabe que el deseo y la ternura pueden coexistir. Quiero mirarte con intensidad y con respeto; besar tus triunfos y secar tus lágrimas; sostener tu libertad y celebrar tus decisiones. No te pido que cambies —te amo tal cual sos—, sino que me permitas el honor de acompañarte, de ser la persona a quien vuelvas después de un día largo.
+
+Imagino un futuro donde los pequeños ritos sean nuestro lenguaje secreto: la canción que sólo nosotros entendemos, la broma que nos hace sonreír en el peor momento, el gesto mínimo que traduce todo un universo. Imagino un abrazo que dure lo que haga falta y conversaciones que no sepan de relojes. Imagino despertarme a tu lado y sentir que, otra vez, no necesito nada más.
+
+Si todo esto suena intenso es porque lo es. No temo a la profundidad: la abrazo. Porque vos me despertás esa valentía: la de decirte todo, con cuidado pero sin máscaras. Quiero compartir tus miedos y tus deseos; quiero aprender tus ritmos y ser el refugio donde te descanses.
+
+Por último, te prometo algo sencillo y eterno: mi presencia consciente. No una presencia automática, sino atenta: escuchando, aprendiendo y eligiéndote cada día. Si alguna vez dudás de mi palabra, mirá mis actos; ahí verás la honestidad de lo que digo.
+
+Con todo lo que tengo y todo lo que soy, te lo digo: te quiero, te anhelo y sueño con un futuro a tu lado. Ma princesse, mi deseo es caminar contigo, construirnos y sostenernos. Vení, tomá mi mano, que yo la sostengo firme.
+
+-- con mucho cariño tu doble en el amor - juan k mendoza (el 06)
+<!-- Aquí termina la carta -->
+          </div>
+
+          <div class="signature" id="signatureText">— con mucho cariño tu doble en el amor - juan k mendoza (el 06)</div>
+        </section>
+      </div>
+
+      <footer class="note">Ma princesse — hoy, mañana y siempre.</footer>
+    </article>
+  </div>
+
+<script>
+/* Stars animation */
+(function(){
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = innerWidth;
+  let h = canvas.height = innerHeight;
+  const stars = [];
+  const count = Math.round((w*h)/42000);
+  for(let i=0;i<count;i++){
+    stars.push({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      r: Math.random()*1.6+0.3,
+      vx: (Math.random()*0.5-0.25),
+      vy: (Math.random()*0.2-0.1),
+      a: Math.random()*0.7+0.15
+    });
+  }
+  function resize(){ w = canvas.width = innerWidth; h = canvas.height = innerHeight; }
+  addEventListener('resize', resize);
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(const s of stars){
+      s.x += s.vx; s.y += s.vy;
+      if(s.x < 0) s.x = w;
+      if(s.x > w) s.x = 0;
+      if(s.y < 0) s.y = h;
+      if(s.y > h) s.y = 0;
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(202,160,242,'+s.a+')';
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* Enter button logic */
+const intro = document.getElementById('intro');
+const enterBtn = document.getElementById('enterBtn');
+const cardRoot = document.getElementById('cardRoot');
+
+enterBtn.addEventListener('click', ()=>{
+  intro.style.display = 'none';
+  cardRoot.setAttribute('aria-hidden','false');
+  // scroll to top
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
